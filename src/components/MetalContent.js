@@ -351,7 +351,7 @@ const MetalContent = () => {
               height: "200px",
             }}
           >
-            <span style={{ position: "absolute", top: "-1rem", left: "584px" }}>
+            <span style={{ position: "absolute", top: "-1rem", left: "586px" }}>
               <i
                 style={{ position: "absolute" }}
                 className="fas fa-caret-down fa-3x"
