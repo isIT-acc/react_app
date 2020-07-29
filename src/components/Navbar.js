@@ -2,8 +2,10 @@ import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AppContext from "../context/app/appContext";
+import { useMediaQuery } from "react-responsive";
 
 const Navbar = ({ title }) => {
+  // const isTabletOrMobile = useMediaQuery({ query: "(max-width: 580px)" });
   const appContext = useContext(AppContext);
   const { setCurPage, curPage } = appContext;
 

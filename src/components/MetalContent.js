@@ -68,7 +68,7 @@ const MetalContent = () => {
   const Plot = ({ width }) => (
     <XYPlot
       width={width}
-      margin={{ left: 50, right: 10, top: 10, bottom: 40 }}
+      margin={{ left: 70, right: 10, top: 10, bottom: 40 }}
       // width={710}
       height={200}
       yDomain={[61.0, 61.84]}

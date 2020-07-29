@@ -15,6 +15,9 @@ import MetalContent from "./MetalContent";
 import RudaCharacteristics from "./RudaCharacteristics";
 import Ruda from "./Ruda";
 import Notification from "./Notification";
+// import { useMediaQuery } from "react-responsive";
+// import { useMediaPredicate } from "react-media-hook";
+import { useMediaQuery } from "react-responsive";
 const MySelect = withStyles({
   root: {
     // width: "10rem",
@@ -43,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Recomendations = () => {
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 821px)" });
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -93,7 +97,7 @@ const Recomendations = () => {
     if (type === ONLY_TXT) {
       return (
         <td key={index}>
-          <div style={blueCell ? setBgBlue : setBgTransparent}>
+          <div className="cell" style={blueCell ? setBgBlue : setBgTransparent}>
             <span style={cellDangerTxt}>{cell}</span>
           </div>
         </td>
@@ -102,7 +106,7 @@ const Recomendations = () => {
     if (type === BG_TXT) {
       return (
         <td key={index}>
-          <div style={blueCell ? setBgBlue : setBgTransparent}>
+          <div className="cell" style={blueCell ? setBgBlue : setBgTransparent}>
             <span style={cellDangerBgTxt}>{cell}</span>
           </div>
         </td>
@@ -110,8 +114,8 @@ const Recomendations = () => {
     }
     if (type === BORDER_BG_TXT) {
       return (
-        <td style={blueCell ? setBgBlue : setBgTransparent} key={index}>
-          <div style={blueCell ? setBgBlue : setBgTransparent}>
+        <td key={index}>
+          <div className="cell" style={blueCell ? setBgBlue : setBgTransparent}>
             <span style={cellDangerBorderBgTxt}>{cell}</span>
           </div>
         </td>
@@ -123,7 +127,7 @@ const Recomendations = () => {
     if (type === ONLY_TXT) {
       return (
         <td key={index}>
-          <div style={blueCell ? setBgBlue : setBgTransparent}>
+          <div className="cell" style={blueCell ? setBgBlue : setBgTransparent}>
             <span style={cellRecomTxt}>{cell}</span>
           </div>
         </td>
@@ -132,7 +136,7 @@ const Recomendations = () => {
     if (type === BG_TXT) {
       return (
         <td key={index}>
-          <div style={blueCell ? setBgBlue : setBgTransparent}>
+          <div className="cell" style={blueCell ? setBgBlue : setBgTransparent}>
             <span style={cellRecomBgTxt}>{cell}</span>
           </div>
         </td>
@@ -140,8 +144,8 @@ const Recomendations = () => {
     }
     if (type === BORDER_BG_TXT) {
       return (
-        <td style={blueCell ? setBgBlue : setBgTransparent} key={index}>
-          <div style={blueCell ? setBgBlue : setBgTransparent}>
+        <td key={index}>
+          <div className="cell" style={blueCell ? setBgBlue : setBgTransparent}>
             <span style={cellRecomBorderBgTxt}>{cell}</span>
           </div>
         </td>
@@ -164,7 +168,7 @@ const Recomendations = () => {
     // backgroundColor: "#e1effc"
     return (
       <td key={index}>
-        <div style={blueCell ? setBgBlue : setBgTransparent}>
+        <div className="cell" style={blueCell ? setBgBlue : setBgTransparent}>
           <span style={{ fontWeight: `${fontWeight}`, color: `${color}` }}>
             {cell}
           </span>
@@ -189,9 +193,30 @@ const Recomendations = () => {
         <table className="main-bg-color" style={tableStyle}>
           <thead>
             <tr style={tableHeaderStyle}>
-              {tableHeaders.map((header, index) => (
-                <th key={index}>{header}</th>
-              ))}
+              {tableHeaders.map((header, index) => {
+                if (isTabletOrMobile && (index === 1 || index === 2))
+                  return (
+                    <th
+                      style={{
+                        width: "1rem",
+                        position: "relative",
+                      }}
+                      key={index}
+                    >
+                      <div
+                        style={{
+                          transform: "rotate(90deg)",
+                          position: "absolute",
+                          top: "7px",
+                          left: "-25%",
+                        }}
+                      >
+                        {header}
+                      </div>
+                    </th>
+                  );
+                else return <th key={index}>{header}</th>;
+              })}
             </tr>
           </thead>
           <tbody>
@@ -397,6 +422,7 @@ const Recomendations = () => {
       <RudaCharacteristics></RudaCharacteristics>
       <Ruda></Ruda>
       <Notification></Notification>
+
       <div style={{ marginTop: "120px" }}></div>
     </div>
   );
