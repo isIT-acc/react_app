@@ -141,19 +141,6 @@ a {
       }
     }
 
-    // для узких колонок
-    // td {
-    //   position: relative;
-    // }
-    // td:before {
-    //   position: absolute;
-    //   content: " ";
-    //   height: 100%;
-    //   width: 80%;
-    //   margin: auto;
-    //   background-color: #e1effc;
-    // }
-
     span {
       display: inline-block;
       width: 100%;
@@ -213,4 +200,25 @@ a {
 .notification {
   background-color: $table-row-bg-color;
   grid-area: notification;
+}
+
+@media (max-width: 1251px) {
+  .gridContainer {
+    // display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2.81fr auto auto auto;
+    // grid-template-rows: 2.81fr 1fr 1fr;
+    grid-template-areas:
+      "table table table"
+      "metal metal metal"
+      "rudaCharacteristics rudaCharacteristics ruda"
+      "rudaCharacteristics rudaCharacteristics notification";
+    // gap: 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .metalContent {
+    min-width: 768px;
+  }
 }

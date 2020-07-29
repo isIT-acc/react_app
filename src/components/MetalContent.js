@@ -1,4 +1,6 @@
 import React from "react";
+
+import PropTypes from "prop-types";
 import Select from "@material-ui/core/Select";
 
 import MenuItem from "@material-ui/core/MenuItem";
@@ -9,6 +11,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import "../../node_modules/react-vis/dist/style.css";
 
 import { curveCatmullRom } from "d3-shape";
+// import AutoSizer from "react-virtualized-auto-sizer";
+
 import {
   XYPlot,
   LineSeries,
@@ -18,8 +22,11 @@ import {
   WhiskerSeries,
   MarkSeries,
   AreaSeries,
+  makeVisFlexible,
+  makeWidthFlexible,
 } from "../../node_modules/react-vis";
 
+// const FlexibleXYPlot = makeVisFlexible(XYPlot);
 const sredneeZaSmenu = 61.45;
 const MySelect = withStyles({
   root: {
@@ -58,6 +65,48 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MetalContent = () => {
+  const Plot = ({ width }) => (
+    <XYPlot
+      width={width}
+      margin={{ left: 50, right: 10, top: 10, bottom: 40 }}
+      // width={710}
+      height={200}
+      yDomain={[61.0, 61.84]}
+      xDomain={[0.5, 12]}
+    >
+      {drawXAxis()}
+      {drawYAxis()}
+
+      {drawHorizontalArea("#dbf0eb", 61.24, 61.64)}
+      {drawHorizontalArea("#fdf1f1", 61.0, 61.24)}
+      {drawHorizontalArea("#fdf1f1", 61.64, 61.84)}
+      {drawGraphicLine("black", "dotted", getPartOfArray(dataForPlot, 9, 11))}
+
+      {drawGraphicLine("black", "solid", getPartOfArray(dataForPlot, 0, 9))}
+      {drawGraphicLine(
+        "rgb(91, 150, 176)",
+        "dotted",
+        getPartOfArray(dataForPlot, 11, 12)
+      )}
+      {drawPointsOnGraphic("#9c3647", getPartOfArray(dataForPlot, 1, 2))}
+      {drawPointsOnGraphic("#258c7a", getPartOfArray(dataForPlot, 3, 8))}
+      {drawPointsOnGraphic("#9c3647", [dataForPlot[9]])}
+      {drawPointsOnGraphic("#258c7a", getPartOfArray(dataForPlot, 10, 12))}
+      {drawYDevOfValue("#5b96b0", [dataForPlot[12]])}
+      {drawYDevOfValue("black", getPartOfArray(dataForPlot, 10, 11))}
+
+      {getDottedVerticalLine(8)}
+      {getDottedHorLine(sredneeZaSmenu)}
+      {getBoldVerticalLine(10.2)}
+    </XYPlot>
+  );
+
+  Plot.propTypes = {
+    width: PropTypes.number,
+  };
+
+  const FlexibleXYPlot = makeWidthFlexible(Plot);
+
   const dataForPlot = [
     { x: 0.5, y: 61.44, size: 0, yVariance: 0.1 },
     { x: 1, y: 61.65, size: 4, yVariance: 0.1 },
@@ -259,7 +308,7 @@ const MetalContent = () => {
       />
     );
   };
-
+  let width = "100%";
   return (
     <div className="metalContent">
       <div className="cardContainer">
@@ -293,20 +342,21 @@ const MetalContent = () => {
           </div>
           <div style={average}>{showAverageValue(arr)}</div>
         </div>
-        <div
-          style={{
-            border: "1px solid #e2e2e2",
-            position: "relative",
-            width: "710px",
-            height: "200px",
-          }}
-        >
-          <span style={{ position: "absolute", top: "-1rem", left: "584px" }}>
-            <i
-              style={{ position: "absolute" }}
-              className="fas fa-caret-down fa-3x"
-            ></i>
-            {/* <div
+        <div className="xyPlotContainer">
+          <div
+            style={{
+              border: "1px solid #e2e2e2",
+              position: "relative",
+              width: "710px",
+              height: "200px",
+            }}
+          >
+            <span style={{ position: "absolute", top: "-1rem", left: "584px" }}>
+              <i
+                style={{ position: "absolute" }}
+                className="fas fa-caret-down fa-3x"
+              ></i>
+              {/* <div
               style={{
                 position: "absolute",
                 top: "2.2rem",
@@ -316,65 +366,18 @@ const MetalContent = () => {
                 border: "1px solid black",
               }}
             ></div> */}
-          </span>
+            </span>
 
-          <div
-            style={{
-              width: "710px",
-              margin: "auto",
-              position: "absolute",
-              top: "0.5rem",
-            }}
-          >
-            <XYPlot
-              margin={{ left: 50, right: 10, top: 10, bottom: 40 }}
-              width={710}
-              height={200}
-              yDomain={[61.0, 61.84]}
-              xDomain={[0.5, 12]}
+            <div
+              style={{
+                width: "710px",
+                margin: "auto",
+                position: "absolute",
+                top: "0.5rem",
+              }}
             >
-              {drawXAxis()}
-              {drawYAxis()}
-
-              {drawHorizontalArea("#dbf0eb", 61.24, 61.64)}
-              {drawHorizontalArea("#fdf1f1", 61.0, 61.24)}
-              {drawHorizontalArea("#fdf1f1", 61.64, 61.84)}
-              {drawGraphicLine(
-                "black",
-                "dotted",
-                getPartOfArray(dataForPlot, 9, 11)
-              )}
-
-              {drawGraphicLine(
-                "black",
-                "solid",
-                getPartOfArray(dataForPlot, 0, 9)
-              )}
-              {drawGraphicLine(
-                "rgb(91, 150, 176)",
-                "dotted",
-                getPartOfArray(dataForPlot, 11, 12)
-              )}
-              {drawPointsOnGraphic(
-                "#9c3647",
-                getPartOfArray(dataForPlot, 1, 2)
-              )}
-              {drawPointsOnGraphic(
-                "#258c7a",
-                getPartOfArray(dataForPlot, 3, 8)
-              )}
-              {drawPointsOnGraphic("#9c3647", [dataForPlot[9]])}
-              {drawPointsOnGraphic(
-                "#258c7a",
-                getPartOfArray(dataForPlot, 10, 12)
-              )}
-              {drawYDevOfValue("#5b96b0", [dataForPlot[12]])}
-              {drawYDevOfValue("black", getPartOfArray(dataForPlot, 10, 11))}
-
-              {getDottedVerticalLine(8)}
-              {getDottedHorLine(sredneeZaSmenu)}
-              {getBoldVerticalLine(10.2)}
-            </XYPlot>
+              <FlexibleXYPlot width={710}></FlexibleXYPlot>
+            </div>
           </div>
         </div>
       </div>
