@@ -10,7 +10,7 @@ const Navbar = ({ title }) => {
   const { setCurPage, curPage } = appContext;
 
   return (
-    <nav className="navbar main-bg-color elevation navbarContainer">
+    <nav className="navbar main-bg-color elevation ">
       <Link to="/" className="logo">
         <div className="logo_image">
           <hr style={{ backgroundColor: "#efbd5d" }}></hr>
