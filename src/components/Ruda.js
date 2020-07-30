@@ -49,8 +49,11 @@ const Ruda = () => {
 
   const ColorButton = withStyles((theme) => ({
     root: {
+      fontSize: "1.3rem",
       color: "white",
       backgroundColor: "#ef4b53",
+      height: "2.2rem",
+      verticalAlign: "middle",
       "&:hover": {
         backgroundColor: "#ef4b53",
         // boxShadow: "none",
@@ -62,7 +65,7 @@ const Ruda = () => {
   return (
     <div className="ruda">
       <div className="cardContainer">
-        <div style={{ marginBottom: "1.5rem" }} className="flexHeader">
+        <div style={{ marginBottom: "1.3rem" }} className="flexHeader">
           <div className="vel">
             <div style={{ fontWeight: "700", color: "black" }}>Руда</div>
             <div
@@ -74,10 +77,10 @@ const Ruda = () => {
           <div className="planVel">
             <div>
               <ColorButton
-                style={{ fontSize: "1.3rem" }}
+                // style={{ fontSize: "1.3rem" }}
                 className={classes.root}
               >
-                {vel - velPlan}
+                <span style={{ lineHeight: "1.8rem" }}>{vel - velPlan}</span>
               </ColorButton>
             </div>
             <div
