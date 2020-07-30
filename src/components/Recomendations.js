@@ -190,233 +190,250 @@ const Recomendations = () => {
   return (
     <div className="gridContainer">
       <div className="recomendations">
-        <table className="main-bg-color" style={tableStyle}>
-          <thead>
-            <tr style={tableHeaderStyle}>
-              {tableHeaders.map((header, index) => {
-                if (isTabletOrMobile && (index === 1 || index === 2))
-                  return (
-                    <th
-                      style={{
-                        width: "1rem",
-                        position: "relative",
-                      }}
-                      key={index}
-                    >
-                      <div
+        <div className="scroll">
+          <table className="main-bg-color" style={tableStyle}>
+            <thead>
+              <tr style={tableHeaderStyle}>
+                {tableHeaders.map((header, index) => {
+                  if (isTabletOrMobile && (index === 1 || index === 2))
+                    return (
+                      <th
                         style={{
-                          transform: "rotate(90deg)",
-                          position: "absolute",
-                          top: "7px",
-                          left: "-25%",
+                          width: "1rem",
+                          position: "relative",
                         }}
+                        key={index}
                       >
-                        {header}
-                      </div>
-                    </th>
-                  );
-                else return <th key={index}>{header}</th>;
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {/* first pair of rows*/}
-            <tr>
-              {trLoadOnMsc.map((cell, index) => {
-                // change font-weight of first column cell lite in task
-                // if(index)
-                if (index === 0) {
-                  return showFirstColCell(cell, index, false);
-                } else {
+                        <div
+                          style={{
+                            transform: "rotate(90deg)",
+                            position: "absolute",
+                            top: "7px",
+                            left: "-25%",
+                          }}
+                        >
+                          {header}
+                        </div>
+                      </th>
+                    );
+                  else return <th key={index}>{header}</th>;
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {/* first pair of rows*/}
+              <tr>
+                {trLoadOnMsc.map((cell, index) => {
+                  // change font-weight of first column cell lite in task
+                  // if(index)
+                  if (index === 0) {
+                    return showFirstColCell(cell, index, false);
+                  } else {
+                    // будет работать в таком ключе как ниже
+                    // if (compareValues(cell, trLoadOnMscRecom[index]))
+                    //   return showCell(cell, index);
+                    // else
+                    // return showDangerCell(cell, index, cur_type);
+                    let blueCellIn = false;
+                    if (
+                      index === 2 ||
+                      index === 5 ||
+                      index === 6 ||
+                      index === 9
+                    )
+                      blueCellIn = true;
+                    if (compareValues(cell, trLoadOnMscRecom[index]))
+                      return showCell(cell, index, blueCellIn);
+                    else return showDangerCell(cell, index, BG_TXT, blueCellIn);
+                  }
+                })}
+              </tr>
+
+              <tr>
+                {trLoadOnMscRecom.map((cell, index) => {
+                  if (index === 0) {
+                    return showFirstColCell(cell, index, true);
+                  }
+                  let blueCellIn = false;
+                  if (index === 2 || index === 5 || index === 6 || index === 9)
+                    blueCellIn = true;
+                  if (compareValues(cell, trLoadOnMsc[index]))
+                    return showCell(cell, index, blueCellIn);
+                  else return showRecomCell(cell, index, BG_TXT, blueCellIn);
+                })}
+              </tr>
+              {/* second pair of rows*/}
+              <tr>
+                {trMineralWater.map((cell, index) => {
+                  if (index === 0) {
+                    return showFirstColCell(cell, index, false);
+                  }
+                  let blueCellIn = false;
+                  if (index === 2 || index === 5 || index === 6 || index === 9)
+                    blueCellIn = true;
+
+                  if (index === 5) {
+                    return showDangerCell(cell, index, ONLY_TXT, blueCellIn);
+                  } else {
+                    if (compareValues(cell, trMineralWaterRecom[index]))
+                      return showCell(cell, index, blueCellIn);
+                    else return showDangerCell(cell, index, BG_TXT, blueCellIn);
+                  }
+                })}
+              </tr>
+              <tr>
+                {trMineralWaterRecom.map((cell, index) => {
+                  if (index === 0) {
+                    return showFirstColCell(cell, index, true);
+                  }
+                  let blueCellIn = false;
+                  if (index === 2 || index === 5 || index === 6 || index === 9)
+                    blueCellIn = true;
+
+                  if (index === 5) {
+                    return showRecomCell(cell, index, ONLY_TXT, blueCellIn);
+                  }
+
+                  if (compareValues(cell, trMineralWater[index]))
+                    return showCell(cell, index, blueCellIn);
+                  else return showRecomCell(cell, index, BG_TXT, blueCellIn);
+                })}
+              </tr>
+
+              {/* third pair of rows*/}
+              <tr>
+                {trDopMshWork.map((cell, index) => {
+                  if (index === 0) {
+                    return showFirstColCell(cell, index, false);
+                  }
+                  let blueCellIn = false;
+                  if (index === 2 || index === 5 || index === 6 || index === 9)
+                    blueCellIn = true;
+
                   // будет работать в таком ключе как ниже
                   // if (compareValues(cell, trLoadOnMscRecom[index]))
                   //   return showCell(cell, index);
                   // else
                   // return showDangerCell(cell, index, cur_type);
+
+                  if (compareValues(cell, trDopMshWorkRecom[index]))
+                    return showCell(cell, index, blueCellIn);
+                  else
+                    return showDangerCell(
+                      cell,
+                      index,
+                      BORDER_BG_TXT,
+                      blueCellIn
+                    );
+                })}
+              </tr>
+              <tr>
+                {trDopMshWorkRecom.map((cell, index) => {
+                  if (index === 0) {
+                    return showFirstColCell(cell, index, true);
+                  }
                   let blueCellIn = false;
                   if (index === 2 || index === 5 || index === 6 || index === 9)
                     blueCellIn = true;
-                  if (compareValues(cell, trLoadOnMscRecom[index]))
+                  if (compareValues(cell, trDopMshWork[index]))
                     return showCell(cell, index, blueCellIn);
-                  else return showDangerCell(cell, index, BG_TXT, blueCellIn);
-                }
-              })}
-            </tr>
+                  else
+                    return showRecomCell(
+                      cell,
+                      index,
+                      BORDER_BG_TXT,
+                      blueCellIn
+                    );
+                })}
+              </tr>
+              {/* forth pair of rows */}
+              <tr>
+                {showFirstColCell(trDopRegime[0], 0, false)}
+                <td colSpan="4" rowSpan="2" style={nasosStyles}>
+                  <span>{trDopRegime[3]}</span>
+                </td>
 
-            <tr>
-              {trLoadOnMscRecom.map((cell, index) => {
-                if (index === 0) {
-                  return showFirstColCell(cell, index, true);
-                }
-                let blueCellIn = false;
-                if (index === 2 || index === 5 || index === 6 || index === 9)
-                  blueCellIn = true;
-                if (compareValues(cell, trLoadOnMsc[index]))
-                  return showCell(cell, index, blueCellIn);
-                else return showRecomCell(cell, index, BG_TXT, blueCellIn);
-              })}
-            </tr>
-            {/* second pair of rows*/}
-            <tr>
-              {trMineralWater.map((cell, index) => {
-                if (index === 0) {
-                  return showFirstColCell(cell, index, false);
-                }
-                let blueCellIn = false;
-                if (index === 2 || index === 5 || index === 6 || index === 9)
-                  blueCellIn = true;
+                {showCellAfterCount()}
 
-                if (index === 5) {
-                  return showDangerCell(cell, index, ONLY_TXT, blueCellIn);
-                } else {
-                  if (compareValues(cell, trMineralWaterRecom[index]))
-                    return showCell(cell, index, blueCellIn);
-                  else return showDangerCell(cell, index, BG_TXT, blueCellIn);
-                }
-              })}
-            </tr>
-            <tr>
-              {trMineralWaterRecom.map((cell, index) => {
-                if (index === 0) {
-                  return showFirstColCell(cell, index, true);
-                }
-                let blueCellIn = false;
-                if (index === 2 || index === 5 || index === 6 || index === 9)
-                  blueCellIn = true;
+                <td colSpan="3" rowSpan="2" style={nasosStyles}>
+                  <span>{trDopRegime[7]}</span>
+                </td>
+                <td>
+                  <span>{trDopRegime[9]}</span>
+                </td>
+                <td colSpan="3" rowSpan="2" style={nasosStyles}>
+                  <span>{trDopRegime[12]}</span>
+                </td>
+                <td>
+                  <span>{trDopRegime[13]}</span>
+                </td>
+                <td colSpan="2" rowSpan="2" style={nasosStyles}>
+                  <span>{trDopRegime[15]}</span>
+                </td>
 
-                if (index === 5) {
-                  return showRecomCell(cell, index, ONLY_TXT, blueCellIn);
-                }
-
-                if (compareValues(cell, trMineralWater[index]))
-                  return showCell(cell, index, blueCellIn);
-                else return showRecomCell(cell, index, BG_TXT, blueCellIn);
-              })}
-            </tr>
-
-            {/* third pair of rows*/}
-            <tr>
-              {trDopMshWork.map((cell, index) => {
-                if (index === 0) {
-                  return showFirstColCell(cell, index, false);
-                }
-                let blueCellIn = false;
-                if (index === 2 || index === 5 || index === 6 || index === 9)
-                  blueCellIn = true;
-
-                // будет работать в таком ключе как ниже
-                // if (compareValues(cell, trLoadOnMscRecom[index]))
-                //   return showCell(cell, index);
-                // else
-                // return showDangerCell(cell, index, cur_type);
-
-                if (compareValues(cell, trDopMshWorkRecom[index]))
-                  return showCell(cell, index, blueCellIn);
-                else
-                  return showDangerCell(cell, index, BORDER_BG_TXT, blueCellIn);
-              })}
-            </tr>
-            <tr>
-              {trDopMshWorkRecom.map((cell, index) => {
-                if (index === 0) {
-                  return showFirstColCell(cell, index, true);
-                }
-                let blueCellIn = false;
-                if (index === 2 || index === 5 || index === 6 || index === 9)
-                  blueCellIn = true;
-                if (compareValues(cell, trDopMshWork[index]))
-                  return showCell(cell, index, blueCellIn);
-                else
-                  return showRecomCell(cell, index, BORDER_BG_TXT, blueCellIn);
-              })}
-            </tr>
-            {/* forth pair of rows */}
-            <tr>
-              {showFirstColCell(trDopRegime[0], 0, false)}
-              <td colSpan="4" rowSpan="2" style={nasosStyles}>
-                <span>{trDopRegime[3]}</span>
-              </td>
-
-              {showCellAfterCount()}
-
-              <td colSpan="3" rowSpan="2" style={nasosStyles}>
-                <span>{trDopRegime[7]}</span>
-              </td>
-              <td>
-                <span>{trDopRegime[9]}</span>
-              </td>
-              <td colSpan="3" rowSpan="2" style={nasosStyles}>
-                <span>{trDopRegime[12]}</span>
-              </td>
-              <td>
-                <span>{trDopRegime[13]}</span>
-              </td>
-              <td colSpan="2" rowSpan="2" style={nasosStyles}>
-                <span>{trDopRegime[15]}</span>
-              </td>
-
-              <td
-                colSpan="2"
-                style={{
-                  verticalAlign: "middle",
-                  textAlign: "right",
-                }}
-                rowSpan="2"
-              >
-                <span>
-                  <MySelect
-                    IconComponent={ExpandMoreIcon}
-                    disableUnderline
-                    value={age}
-                    onChange={handleChange}
-                    displayEmpty
-                    // className={classes.selectEmpty}
-                    inputProps={{ "aria-label": "Without label" }}
-                    style={{ marginRight: "1rem" }}
-                  >
-                    <MenuItem value="">на 3-97</MenuItem>
-                    <MenuItem value={10}>на 3-98</MenuItem>
-                    <MenuItem value={20}>на 3-99</MenuItem>
-                    <MenuItem value={30}>на 3-100</MenuItem>
-                  </MySelect>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              {showFirstColCell(trDopRegimeRecom[0], 0, true)}
-
-              {compareValues(trDopRegime[5], trDopRegimeRecom[5])
-                ? showCell(trDopRegimeRecom[5], 5)
-                : showRecomCell(trDopRegimeRecom[5], 5, BORDER_BG_TXT)}
-
-              <td>
-                <span>{trDopRegimeRecom[9]}</span>
-              </td>
-
-              <td>
-                <span>{trDopRegimeRecom[13]}</span>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan="3" style={{ textAlign: "left" }}>
-                {lastUpdateTime.getHours()}:{lastUpdateTime.getMinutes()}
-                <span style={{ paddingLeft: "1rem" }}>
-                  Рекомендация обновлена
-                </span>
-              </td>
-              <td colSpan={tableHeaders.length - 3}>
-                <Link to="/history">
-                  <span style={{ color: "black" }}>Просмотреть историю</span>
-                  <span style={{ color: "black" }} className="processStep">
-                    &gt;
+                <td
+                  colSpan="2"
+                  style={{
+                    verticalAlign: "middle",
+                    textAlign: "right",
+                  }}
+                  rowSpan="2"
+                >
+                  <span>
+                    <MySelect
+                      IconComponent={ExpandMoreIcon}
+                      disableUnderline
+                      value={age}
+                      onChange={handleChange}
+                      displayEmpty
+                      // className={classes.selectEmpty}
+                      inputProps={{ "aria-label": "Without label" }}
+                      style={{ marginRight: "1rem" }}
+                    >
+                      <MenuItem value="">на 3-97</MenuItem>
+                      <MenuItem value={10}>на 3-98</MenuItem>
+                      <MenuItem value={20}>на 3-99</MenuItem>
+                      <MenuItem value={30}>на 3-100</MenuItem>
+                    </MySelect>
                   </span>
-                </Link>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+                </td>
+              </tr>
+              <tr>
+                {showFirstColCell(trDopRegimeRecom[0], 0, true)}
+
+                {compareValues(trDopRegime[5], trDopRegimeRecom[5])
+                  ? showCell(trDopRegimeRecom[5], 5)
+                  : showRecomCell(trDopRegimeRecom[5], 5, BORDER_BG_TXT)}
+
+                <td>
+                  <span>{trDopRegimeRecom[9]}</span>
+                </td>
+
+                <td>
+                  <span>{trDopRegimeRecom[13]}</span>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan="3" style={{ textAlign: "left" }}>
+                  {lastUpdateTime.getHours()}:{lastUpdateTime.getMinutes()}
+                  <span style={{ paddingLeft: "1rem" }}>
+                    Рекомендация обновлена
+                  </span>
+                </td>
+                <td colSpan={tableHeaders.length - 3}>
+                  <Link to="/history">
+                    <span style={{ color: "black" }}>Просмотреть историю</span>
+                    <span style={{ color: "black" }} className="processStep">
+                      &gt;
+                    </span>
+                  </Link>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
       <MetalContent></MetalContent>
       <RudaCharacteristics></RudaCharacteristics>
