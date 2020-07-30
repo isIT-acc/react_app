@@ -11,6 +11,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import "../../node_modules/react-vis/dist/style.css";
 
 import { curveCatmullRom } from "d3-shape";
+import Plot from "./Plot";
 // import AutoSizer from "react-virtualized-auto-sizer";
 
 import {
@@ -46,7 +47,7 @@ const MySelect = withStyles({
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    // minWidth: 120,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -65,47 +66,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MetalContent = () => {
-  const Plot = ({ width }) => (
-    <XYPlot
-      width={width}
-      margin={{ left: 70, right: 10, top: 10, bottom: 40 }}
-      // width={710}
-      height={200}
-      yDomain={[61.0, 61.84]}
-      xDomain={[0.5, 12]}
-    >
-      {drawXAxis()}
-      {drawYAxis()}
+  // Plot.propTypes = {
+  //   width: PropTypes.number,
+  // };
 
-      {drawHorizontalArea("#dbf0eb", 61.24, 61.64)}
-      {drawHorizontalArea("#fdf1f1", 61.0, 61.24)}
-      {drawHorizontalArea("#fdf1f1", 61.64, 61.84)}
-      {drawGraphicLine("black", "dotted", getPartOfArray(dataForPlot, 9, 11))}
-
-      {drawGraphicLine("black", "solid", getPartOfArray(dataForPlot, 0, 9))}
-      {drawGraphicLine(
-        "rgb(91, 150, 176)",
-        "dotted",
-        getPartOfArray(dataForPlot, 11, 12)
-      )}
-      {drawPointsOnGraphic("#9c3647", getPartOfArray(dataForPlot, 1, 2))}
-      {drawPointsOnGraphic("#258c7a", getPartOfArray(dataForPlot, 3, 8))}
-      {drawPointsOnGraphic("#9c3647", [dataForPlot[9]])}
-      {drawPointsOnGraphic("#258c7a", getPartOfArray(dataForPlot, 10, 12))}
-      {drawYDevOfValue("#5b96b0", [dataForPlot[12]])}
-      {drawYDevOfValue("black", getPartOfArray(dataForPlot, 10, 11))}
-
-      {getDottedVerticalLine(8)}
-      {getDottedHorLine(sredneeZaSmenu)}
-      {getBoldVerticalLine(10.2)}
-    </XYPlot>
-  );
-
-  Plot.propTypes = {
-    width: PropTypes.number,
-  };
-
-  const FlexibleXYPlot = makeWidthFlexible(Plot);
+  // const FlexibleXYPlot = makeWidthFlexible(Plot);
 
   const dataForPlot = [
     { x: 0.5, y: 61.44, size: 0, yVariance: 0.1 },
@@ -182,133 +147,7 @@ const MetalContent = () => {
       </div>
     );
   };
-  const axisStyle = {
-    ticks: {
-      fontSize: "14px",
-      // color: "black",
-      stroke: "black",
-    },
-    title: {
-      fontSize: "16px",
-      // color: "black",
-    },
-  };
-  function myFormatter(t, i) {
-    return (
-      <tspan x="-18" dx="1rem">
-        {String(t).replace(".", ",")}
-      </tspan>
-    );
-  }
 
-  const func = (objsArr) => {
-    let arr = objsArr.map((value) => {
-      return value.x;
-    });
-    arr.splice(0, 1);
-    return arr;
-  };
-  //xCoord:number type
-  // const getVerticalLine = (xCoord) => {};
-
-  // const getHorizontalLine = (yCoord) => {};
-
-  const getPartOfArray = (array, firstIndex, secondIndex) => {
-    let arr = [];
-    let i = 0;
-    let j = firstIndex;
-    for (; j <= secondIndex; j++) {
-      arr[i++] = array[j];
-    }
-
-    return arr;
-  };
-  // color-string,type-string, dotted or solid,
-  const drawGraphicLine = (color, type, arrayOfVals) => {
-    console.log(arrayOfVals);
-    if (type === "dotted")
-      return (
-        <LineSeries
-          curve={curveCatmullRom.alpha(0.5)}
-          strokeType="literal"
-          sizeType="literal"
-          data={arrayOfVals}
-          style={{
-            // note that this can not be translated to the canvas version
-            strokeDasharray: "1 3",
-            stroke: color,
-          }}
-        />
-      );
-    if (type === "solid")
-      return (
-        <LineSeries
-          curve={curveCatmullRom.alpha(0.5)}
-          strokeType="literal"
-          sizeType="literal"
-          style={{ stroke: color }}
-          data={arrayOfVals}
-        />
-      );
-  };
-
-  const drawXAxis = () => {
-    return (
-      <XAxis
-        strokeType="literal"
-        tickFormat={myFormatter}
-        tickValues={func(dataForPlot)}
-        style={axisStyle}
-        tickSize={0}
-      />
-    );
-  };
-
-  const drawYAxis = () => {
-    return (
-      <YAxis
-        tickFormat={myFormatter}
-        tickValues={[0, 61.44, 61.84]}
-        style={axisStyle}
-        tickSize={0}
-      />
-    );
-  };
-  const drawPointsOnGraphic = (color, arrayOfPoints) => {
-    return (
-      <MarkSeries
-        curve={curveCatmullRom.alpha(0.5)}
-        colorType="literal"
-        sizeType="literal"
-        style={{ stroke: color, fill: color }}
-        data={arrayOfPoints}
-      />
-    );
-  };
-
-  const drawYDevOfValue = (color, arrayOfData) => {
-    return (
-      <WhiskerSeries
-        yVarianceType="literal"
-        className="whisker-series-example"
-        style={{ stroke: color }}
-        data={arrayOfData}
-      />
-    );
-  };
-
-  const drawHorizontalArea = (color, yDown, yUp) => {
-    return (
-      <AreaSeries
-        style={{ stroke: color, fill: color }}
-        data={[
-          { x: 0.5, y: yUp, y0: yDown },
-          { x: 12, y: yUp, y0: yDown },
-        ]}
-      />
-    );
-  };
-  let width = "100%";
   return (
     <div className="metalContent">
       <div className="cardContainer">
@@ -342,21 +181,21 @@ const MetalContent = () => {
           </div>
           <div style={average}>{showAverageValue(arr)}</div>
         </div>
-        <div className="xyPlotContainer">
-          <div
+        {/* <div className="xyPlotContainer"> */}
+        {/* <div
             style={{
               border: "1px solid #e2e2e2",
               position: "relative",
               width: "710px",
               height: "200px",
             }}
-          >
-            <span style={{ position: "absolute", top: "-1rem", left: "586px" }}>
+          > */}
+        {/* <span style={{ position: "absolute", top: "-1rem", left: "586px" }}>
               <i
                 style={{ position: "absolute" }}
                 className="fas fa-caret-down fa-3x"
-              ></i>
-              {/* <div
+              ></i> */}
+        {/* <div
               style={{
                 position: "absolute",
                 top: "2.2rem",
@@ -366,82 +205,23 @@ const MetalContent = () => {
                 border: "1px solid black",
               }}
             ></div> */}
-            </span>
+        {/* </span> */}
 
-            <div
+        {/* <div
               style={{
                 width: "710px",
                 margin: "auto",
                 position: "absolute",
                 top: "0.5rem",
               }}
-            >
-              <FlexibleXYPlot width={710}></FlexibleXYPlot>
-            </div>
-          </div>
-        </div>
+            > */}
+        {/* <FlexibleXYPlot width={710}></FlexibleXYPlot> */}
+        <Plot></Plot>
+        {/* </div> */}
+        {/* </div> */}
+        {/* </div> */}
       </div>
     </div>
-  );
-};
-const getDottedHorLine = (yCoord) => {
-  return (
-    <LineSeries
-      curve={curveCatmullRom.alpha(0.5)}
-      strokeType="literal"
-      sizeType="literal"
-      data={[
-        {
-          x: 0.5,
-          y: sredneeZaSmenu,
-        },
-        {
-          x: 12,
-          y: sredneeZaSmenu,
-        },
-      ]}
-      style={{
-        // note that this can not be translated to the canvas version
-        strokeDasharray: "1 3",
-        stroke: "rgb(168, 168, 168)",
-      }}
-    />
-  );
-};
-const getDottedVerticalLine = (xCoord) => {
-  return (
-    <LineSeries
-      curve={curveCatmullRom.alpha(0.5)}
-      strokeType="literal"
-      sizeType="literal"
-      data={[
-        { x: 8, y: 61.0 },
-        { x: 8, y: 61.84 },
-      ]}
-      style={{
-        // note that this can not be translated to the canvas version
-        strokeDasharray: "1 3",
-        stroke: "rgb(168, 168, 168)",
-      }}
-    />
-  );
-};
-const getBoldVerticalLine = (xCoord) => {
-  return (
-    <LineSeries
-      curve={curveCatmullRom.alpha(0.5)}
-      strokeType="literal"
-      sizeType="literal"
-      data={[
-        { x: xCoord, y: 61.0 },
-        { x: xCoord, y: 61.84 },
-      ]}
-      style={{
-        // note that this can not be translated to the canvas version
-        stroke: "black",
-        position: "absolute",
-      }}
-    />
   );
 };
 
