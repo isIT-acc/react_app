@@ -11,7 +11,7 @@ const Navbar = ({ title }) => {
 
   return (
     <nav className="navbar main-bg-color elevation ">
-      <Link to="/" className="logo">
+      <Link to="/react_app/" className="logo">
         <div className="logo_image">
           <hr style={{ backgroundColor: "#efbd5d" }}></hr>
           <hr style={{ backgroundColor: "#c9853f" }}></hr>
@@ -21,12 +21,16 @@ const Navbar = ({ title }) => {
       </Link>
       <Link
         id="recomendations"
-        to="/"
+        to="/react_app/"
         className="uppercase-text menu_item active"
       >
         рекомендации
       </Link>
-      <Link id="history" to="/history" className="uppercase-text menu_item">
+      <Link
+        id="history"
+        to="/react_app/history"
+        className="uppercase-text menu_item"
+      >
         история
       </Link>
     </nav>
