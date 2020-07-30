@@ -12,6 +12,7 @@ import "../../node_modules/react-vis/dist/style.css";
 
 import { curveCatmullRom } from "d3-shape";
 import Plot from "./Plot";
+import { useMediaQuery } from "react-responsive";
 // import AutoSizer from "react-virtualized-auto-sizer";
 
 import {
@@ -66,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MetalContent = () => {
+  const isMobile = useMediaQuery({ query: "(max-width: 438px)" });
   // Plot.propTypes = {
   //   width: PropTypes.number,
   // };
@@ -174,52 +176,14 @@ const MetalContent = () => {
           </div>
         </div>
         <div style={flexSubheaderStyle}>
-          <div style={factAndForecast}>
+          <div style={isMobile ? flexSubheaderMediaStyle : factAndForecast}>
             {arr.map((value, index) => {
               return showValue(value, index);
             })}
           </div>
           <div style={average}>{showAverageValue(arr)}</div>
         </div>
-        {/* <div className="xyPlotContainer"> */}
-        {/* <div
-            style={{
-              border: "1px solid #e2e2e2",
-              position: "relative",
-              width: "710px",
-              height: "200px",
-            }}
-          > */}
-        {/* <span style={{ position: "absolute", top: "-1rem", left: "586px" }}>
-              <i
-                style={{ position: "absolute" }}
-                className="fas fa-caret-down fa-3x"
-              ></i> */}
-        {/* <div
-              style={{
-                position: "absolute",
-                top: "2.2rem",
-                left: "0.85rem",
-                zIndex: "1000",
-                height: "139px",
-                border: "1px solid black",
-              }}
-            ></div> */}
-        {/* </span> */}
-
-        {/* <div
-              style={{
-                width: "710px",
-                margin: "auto",
-                position: "absolute",
-                top: "0.5rem",
-              }}
-            > */}
-        {/* <FlexibleXYPlot width={710}></FlexibleXYPlot> */}
         <Plot></Plot>
-        {/* </div> */}
-        {/* </div> */}
-        {/* </div> */}
       </div>
     </div>
   );
@@ -234,6 +198,11 @@ const flexSubheaderStyle = {
   justifyContent: "space-between",
   padding: "1rem 0",
   alignItems: "flex-start",
+};
+
+const flexSubheaderMediaStyle = {
+  display: "flex",
+  flexDirection: "column",
 };
 
 const factAndForecast = {
