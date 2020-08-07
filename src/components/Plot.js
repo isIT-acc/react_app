@@ -51,7 +51,6 @@ const Plot = () => {
   };
   // color-string,type-string, dotted or solid,
   const drawGraphicLine = (color, type, arrayOfVals) => {
-    console.log(arrayOfVals);
     if (type === "dotted")
       return (
         <LineSeries
