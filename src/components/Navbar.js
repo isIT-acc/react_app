@@ -12,6 +12,12 @@ class Navbar extends React.Component {
     if (props.highlighted === "history")
       this.state = { recom: false, history: true };
   }
+  // shouldComponentUpdate() {
+  //   if (this.props.highlighted === "recom")
+  //     this.state = { recom: true, history: false };
+  //   if (this.props.highlighted === "history")
+  //     this.state = { recom: false, history: true };
+  // }
 
   static defaultProps = {
     title: "EVRAZ",
@@ -20,17 +26,11 @@ class Navbar extends React.Component {
     title: PropTypes.string.isRequired,
   };
 
-  // const isTabletOrMobile = useMediaQuery({ query: "(max-width: 580px)" });
-  // const appContext = useContext(AppContext);
-  // const { setCurPage, curPage } = appContext;
-
-  handleRecomClick = () => {
-    this.setState({ recom: true, history: false });
-  };
-  handleHistoryClick = () => {
-    this.setState({ recom: false, history: true });
-  };
   render() {
+    if (this.props.highlighted === "recom")
+      this.state = { recom: true, history: false };
+    if (this.props.highlighted === "history")
+      this.state = { recom: false, history: true };
     return (
       <nav className="navbar main-bg-color elevation ">
         <Link to="/react_app/" className="logo" onClick={this.handleRecomClick}>
