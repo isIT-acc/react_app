@@ -7,7 +7,10 @@ import { useMediaQuery } from "react-responsive";
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { recom: true, history: false };
+    if (props.highlighted === "recom")
+      this.state = { recom: true, history: false };
+    if (props.highlighted === "history")
+      this.state = { recom: false, history: true };
   }
 
   static defaultProps = {

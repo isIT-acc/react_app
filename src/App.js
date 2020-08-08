@@ -13,16 +13,16 @@ class App extends Component {
       <AppState>
         <Router>
           <div className="App">
-            <Navbar />
             <div className="container">
               <Switch>
-                <Route
-                  exact
-                  path={["/", "/react_app/"]}
-                  component={Recomendations}
-                />
-                {/* <Route exact path="/react_app/" component={Recomendations} /> */}
-                <Route exact path="/react_app/history" component={History} />
+                <Route exact path={["/", "/react_app/"]}>
+                  <Navbar highlighted="recom" />
+                  <Recomendations />
+                </Route>
+                <Route exact path="/react_app/history">
+                  <Navbar highlighted="history" />
+                  <History />
+                </Route>
               </Switch>
             </div>
           </div>
