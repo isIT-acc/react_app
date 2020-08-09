@@ -36,15 +36,13 @@ const RudaCharacteristics = () => {
   };
 
   const showRow = (valsArr) => {
-    {
-      return valsArr.map((cell, index) => {
-        if (index === 0) {
-          return showFirstColumnCell(cell, index);
-        } else {
-          return showCell(cell, index);
-        }
-      });
-    }
+    return valsArr.map((cell, index) => {
+      if (index === 0) {
+        return showFirstColumnCell(cell, index);
+      } else {
+        return showCell(cell, index);
+      }
+    });
   };
 
   const showTableBody = (arrayOfRows) => {

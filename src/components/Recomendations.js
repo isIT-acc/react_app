@@ -4,19 +4,17 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import AppContext from "../context/app/appContext";
 
-import { ONLY_TXT, BG_TXT, BORDER_BG_TXT, NOTHING } from "../types/cellTypes";
+import { ONLY_TXT, BG_TXT, BORDER_BG_TXT } from "../types/cellTypes";
 
 import MetalContent from "./MetalContent";
 import RudaCharacteristics from "./RudaCharacteristics";
 import Ruda from "./Ruda";
 import Notification from "./Notification";
-// import { useMediaQuery } from "react-responsive";
-// import { useMediaPredicate } from "react-media-hook";
 import { useMediaQuery } from "react-responsive";
 const MySelect = withStyles({
   root: {
@@ -32,18 +30,6 @@ const MySelect = withStyles({
     marginRight: "0.25rem",
   },
 })(Select);
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    // marginTop: theme.spacing(2),
-    border: "1px solid #e2e2e2",
-    fontSize: "0.7rem",
-    padding: "0.15rem 0.3rem",
-  },
-}));
 
 const Recomendations = () => {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 821px)" });
@@ -51,10 +37,8 @@ const Recomendations = () => {
     setAge(event.target.value);
   };
   const [age, setAge] = React.useState("");
-  const classes = useStyles();
   const appContext = useContext(AppContext);
   const {
-    tableData,
     getTableData,
     tableHeaders,
     trLoadOnMsc,
@@ -68,27 +52,15 @@ const Recomendations = () => {
     lastUpdateTime,
   } = appContext;
 
-  //types of highlighting
-  // const ONLY_TXT = "ONLY_TXT";
-  // const BG_TXT = "BG_TXT";
-  // const BORDER_BG_TXT = "BORDER_BG_TXT";
-
   useEffect(() => {
     getTableData();
-    // showCell();
     // eslint-disable-next-line
   }, []);
-  let cur_type = NOTHING;
-  const indexesToHighlite = [2, 5, 6, 9];
+
   const compareValues = (value1, value2) => {
     // делаем рассчёты и присваиваем какое-то значение текущему типу, всего три типа ячеек в таблице, ячейка получает какой-то один тип и стилизуется на выходе в соответствии с этим типом
 
     if (value1 !== value2) {
-      // ONLY_TXT, BG_TXT, BORDER_BG_TXT
-      // cur_type = BG_TXT;
-      // cur_type = ONLY_TXT;
-      cur_type = BORDER_BG_TXT;
-
       return false;
     } else return true;
   };

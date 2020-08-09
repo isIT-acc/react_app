@@ -1,11 +1,4 @@
-import {
-  SEARCH_USERS,
-  SET_LOADING,
-  CLEAR_USERS,
-  GET_USER,
-  GET_REPOS,
-  GET_TABLE_DATA,
-} from "../types";
+import { GET_TABLE_DATA } from "../types";
 
 export default (state, action) => {
   switch (action.type) {

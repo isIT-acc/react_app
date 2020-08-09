@@ -1,34 +1,17 @@
 import React from "react";
 
-import PropTypes from "prop-types";
 import Select from "@material-ui/core/Select";
 
 import MenuItem from "@material-ui/core/MenuItem";
 
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import "../../node_modules/react-vis/dist/style.css";
 
-import { curveCatmullRom } from "d3-shape";
 import Plot from "./Plot";
 import { useMediaQuery } from "react-responsive";
-// import AutoSizer from "react-virtualized-auto-sizer";
 
-import {
-  XYPlot,
-  LineSeries,
-  XAxis,
-  YAxis,
-  LineMarkSeries,
-  WhiskerSeries,
-  MarkSeries,
-  AreaSeries,
-  makeVisFlexible,
-  makeWidthFlexible,
-} from "../../node_modules/react-vis";
-
-// const FlexibleXYPlot = makeVisFlexible(XYPlot);
 const sredneeZaSmenu = 61.45;
 const MySelect = withStyles({
   root: {
@@ -45,55 +28,13 @@ const MySelect = withStyles({
   },
 })(Select);
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    // minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  root: {
-    width: "10rem",
-    border: "1px solid #e2e2e2",
-    fontSize: "0.7rem",
-    padding: "0.15rem 0.8rem",
-  },
-  icon: {
-    fontSize: "0.3rem",
-    color: "red",
-  },
-  nativeInput: {},
-}));
-
 const MetalContent = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 438px)" });
-  // Plot.propTypes = {
-  //   width: PropTypes.number,
-  // };
 
-  // const FlexibleXYPlot = makeWidthFlexible(Plot);
-
-  const dataForPlot = [
-    { x: 0.5, y: 61.44, size: 0, yVariance: 0.1 },
-    { x: 1, y: 61.65, size: 4, yVariance: 0.1 },
-    { x: 2, y: 61.67, size: 4, yVariance: 0.1 },
-    { x: 3, y: 61.5, size: 4, yVariance: 0.1 },
-    { x: 4, y: 61.49, size: 4, yVariance: 0.1 },
-    { x: 5, y: 61.35, size: 4, yVariance: 0.1 },
-    { x: 6, y: 61.43, size: 4, yVariance: 0.1 },
-    { x: 7, y: 61.45, size: 4, yVariance: 0.1 },
-    { x: 8, y: 61.43, size: 4, yVariance: 0.1 },
-    { x: 9, y: 61.66, size: 4, yVariance: 0.1 },
-    { x: 10, y: 61.46, size: 4, yVariance: 0.1 },
-    { x: 11, y: 61.42, size: 4, yVariance: 0.12 },
-    { x: 12, y: 61.45, size: 4, yVariance: 0.3 },
-  ];
   const handleChange = (event) => {
     setAge(event.target.value);
   };
   const [age, setAge] = React.useState("");
-  const classes = useStyles();
 
   const arr = [
     { val: 61.44, time: new Date(2020, 7, 26, 1, 0, 0), fact: false },
@@ -110,14 +51,6 @@ const MetalContent = () => {
     { val: 61.42, time: new Date(2020, 7, 26, 11, 0, 0), fact: false },
     { val: 61.45, time: new Date(2020, 7, 26, 12, 0, 0), fact: false },
   ];
-
-  const countAverageVal = (array) => {
-    let average = 0;
-    array.forEach((value) => {
-      average += value.val;
-    });
-    return average / array.length;
-  };
 
   const showValue = (value, index) => {
     if (index >= 9)

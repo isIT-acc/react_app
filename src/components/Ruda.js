@@ -4,9 +4,12 @@ import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 const Ruda = () => {
-  const [vel, setVel] = React.useState(250);
-  const [velPlan, setVelPlan] = React.useState(255);
-  const [maxSliderValue, setMaxSliderValue] = React.useState(45900);
+  const vel = 250;
+  const velPlan = 255;
+  const maxSliderValue = 45900;
+  // const [vel, setVel] = React.useState(250);
+  // const [velPlan, setVelPlan] = React.useState(255);
+  // const [maxSliderValue, setMaxSliderValue] = React.useState(45900);
   const useStyles = makeStyles((theme) => ({
     root: {
       height: "1.8rem",
