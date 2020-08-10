@@ -395,7 +395,7 @@ const Recomendations = () => {
                   </span>
                 </td>
                 <td colSpan={tableHeaders.length - 3}>
-                  <Link to="/react_app/history">
+                  <Link to="/evraz_2/history">
                     <span style={{ color: "black" }}>Просмотреть историю</span>
                     <span style={{ color: "black" }} className="processStep">
                       &gt;

@@ -14,13 +14,13 @@ class App extends Component {
         <Router>
           <div className="App">
             <Switch>
-              <Route exact path={["/", "/react_app/"]}>
+              <Route exact path={["/", "/evraz_2/"]}>
                 <Navbar highlighted="recom" />
                 <div className="container">
                   <Recomendations />
                 </div>
               </Route>
-              <Route exact path="/react_app/history">
+              <Route exact path="/evraz_2/history">
                 <Navbar highlighted="history" />
                 <div className="container">
                   <History />
