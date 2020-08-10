@@ -13,53 +13,25 @@ class App extends Component {
       <AppState>
         <Router>
           <div className="App">
-            <div className="container">
-              <Switch>
-                <Route exact path={["/", "/react_app/"]}>
-                  <Navbar highlighted="recom" />
+            <Switch>
+              <Route exact path={["/", "/react_app/"]}>
+                <Navbar highlighted="recom" />
+                <div className="container">
                   <Recomendations />
-                </Route>
-                <Route exact path="/react_app/history">
-                  <Navbar highlighted="history" />
+                </div>
+              </Route>
+              <Route exact path="/react_app/history">
+                <Navbar highlighted="history" />
+                <div className="container">
                   <History />
-                </Route>
-              </Switch>
-            </div>
+                </div>
+              </Route>
+            </Switch>
           </div>
         </Router>
       </AppState>
     );
   }
 }
-// class App extends Component {
-//   // lifecycle method, when components are loaded works
-//   foo = () => "Bars";
-//   render() {
-//     const name = "John Doe";
-//     const loading = false;
-//     const showName = true;
-
-//     // if (loading) {
-//     //   return <h4>Loading ...</h4>;
-//     // }
-//     // const foo = () => "Bar";
-//     return (
-//       // <React.Fragment>
-//       // static markup
-//       <div className="App">
-//         {loading ? <h4>Loading...</h4> : <h1>hello {showName && name}</h1>}
-//         {/* <h1>
-//           Hello {name.toUpperCase()}
-//           {1 + 1}!
-//         </h1>
-//         <h2>Goodbye {this.foo()}</h2> */}
-//       </div>
-//       /* </React.Fragment> */
-//       // jsx, className instead class
-//       // htmlFor instead for attribute in label element
-//       // jsx has only one parent element
-//     );
-//   }
-// }
 
 export default App;
