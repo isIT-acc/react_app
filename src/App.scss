@@ -78,6 +78,9 @@ a {
 // recommendations, table
 .recomendations {
   grid-area: table;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
   td {
     text-align: center;
   }
@@ -173,6 +176,9 @@ a {
 
 .gridContainer {
   display: grid;
+  display: -ms-grid;
+  -ms-grid-columns: 650px 300px 300px;
+  -ms-grid-rows: 2.81fr 1fr 1fr;
   grid-template-columns: 650px 300px 300px;
   // grid-template-rows: 2.81fr 0.9fr 0.9fr;
   grid-template-rows: 2.81fr 1fr 1fr;
@@ -180,26 +186,43 @@ a {
     "table table table"
     "metal rudaCharacteristics ruda"
     "metal rudaCharacteristics notification";
-  gap: 1rem 1.5rem;
+  // gap: 1rem 1.5rem;
 }
 
 .metalContent {
   background-color: $table-row-bg-color;
   grid-area: metal;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-row-span: 2;
+  margin-top: 1rem;
 }
 
 .rudaCharacteristics {
   background-color: $table-row-bg-color;
   grid-area: rudaCharacteristics;
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  -ms-grid-row-span: 2;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
 }
 
 .ruda {
   background-color: $table-row-bg-color;
   grid-area: ruda;
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
 }
 .notification {
   background-color: $table-row-bg-color;
   grid-area: notification;
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
 }
 
 @media (max-width: 1251px) {
@@ -208,12 +231,36 @@ a {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 2.81fr auto auto auto;
     // grid-template-rows: 2.81fr 1fr 1fr;
+    -ms-grid-columns: 1fr 1fr 1fr;
+    -ms-grid-rows: 2.81fr auto auto auto;
     grid-template-areas:
       "table table table"
       "metal metal metal"
       "rudaCharacteristics rudaCharacteristics ruda"
       "rudaCharacteristics rudaCharacteristics notification";
     // gap: 1rem 1.5rem;
+  }
+  .metalContent {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
+    -ms-grid-row-span: 1;
+  }
+  .rudaCharacteristics {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    -ms-grid-row-span: 2;
+    -ms-grid-column-span: 2;
+    margin-left: 0;
+  }
+
+  .ruda {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+  }
+  .notification {
+    -ms-grid-row: 4;
+    -ms-grid-column: 3;
   }
 }
 @media (max-width: 1215px) {
@@ -251,6 +298,7 @@ a {
   .notification,
   .recomendations {
     margin-bottom: 1rem;
+    margin-left: 0;
   }
 
   .gridContainer {
