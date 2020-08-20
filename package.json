@@ -2,7 +2,7 @@
   "name": "evraz",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://isIT-acc.github.io/evraz_2",
+  "homepage": "https://isIT-acc.github.io/react_app",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b deployment -d build",
+    "deploy": "gh-pages -b deploy -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Navbar(props) {
   return (
     <nav className="navbar main-bg-color elevation ">
-      <Link to="/evraz_2/" className="logo">
+      <Link to="/react_app/" className="logo">
         <div className="logo_image">
           <hr style={{ backgroundColor: "#efbd5d" }}></hr>
           <hr style={{ backgroundColor: "#c9853f" }}></hr>
@@ -16,7 +16,7 @@ function Navbar(props) {
 
       <Link
         id="recomendations"
-        to="/evraz_2/"
+        to="/react_app/"
         className={
           props.highlighted === "recom"
             ? "uppercase-text menu_item active"
@@ -28,7 +28,7 @@ function Navbar(props) {
 
       <Link
         id="history"
-        to="/evraz_2/history"
+        to="/react_app/history"
         className={
           props.highlighted === "history"
             ? "uppercase-text menu_item active"
